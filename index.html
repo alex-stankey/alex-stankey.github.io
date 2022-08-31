@@ -4,13 +4,28 @@
     <!-- This script loads the Appian Web components; change it to your Appian server's domain -->
     <script src="https://cs-sandbox1.appiancloud.com/suite/tempo/ui/sail-client/embeddedBootstrap.nocache.js" id="appianEmbedded"></script>
   <link rel="stylesheet" href="citi.css">
-  
+    <script>
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const recordId = urlParams.get("recordId");
+  </script>  
   </head>
   <body>
     <!-- This custom HTML element specifies an Appian report to embed on the HTML page -->
-    <appian-report reportUrlStub="sdJaow"></appian-report>
-    <h2>Record Details</h2>
-    <div>Test: <input type="text"></input></div>
-    <appian-record-view recordTypeUrlStub="fe1x0w" recordIdentifier="1" recordViewUrlStub="summary"></appian-record-view>
+    <script>
+    if (recordId == null || recordId === null)
+    {
+        document.write("<appian-report reportUrlStub=\"sdJaow\"></appian-report>");
+     }
+     </script>
+     <script>
+      //document.write("<H2>---" + recordId + "----</H2>");
+      if ( !(recordId == null || recordId ===  null))
+      {
+        document.write("<H1>Record ID: " + recordId + "</H1>");
+        document.write("<appian-record-view recordTypeUrlStub=\"fe1x0w\" recordIdentifier=\"" + recordId + "\" recordViewUrlStub=\"summary\"></appian-record-view>");
+      }
+    </script>
+    
   </body>
 </html>
