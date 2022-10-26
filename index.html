@@ -32,9 +32,9 @@
         // Create the appian-task embedded tag
         var recordTag = document.createElement('appian-record');
         recordTag.setAttribute('id', embeddedRecordTag);
-        recordTag.setAttribute('recordTypeUrlStub', event);
-        recordTag.setAttribute('recordViewUrlStub', 'summary');
-        recordTag.setAttribute('recordIdentifier', '');
+        recordTag.setAttribute('recordTypeUrlStub', event.detail.recordTypeUrlStub);
+        recordTag.setAttribute('recordViewUrlStub', event.detail.recordViewUrlStub);
+        recordTag.setAttribute('recordIdentifier', event.detail.recordIdentifier);
 
         // Remove the appian-report tag and add the task tag in its place
         var reportTag = document.getElementById(embeddedMainViewTag);
