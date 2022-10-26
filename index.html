@@ -24,7 +24,7 @@
     function recordLinkOpened(event) {
         // Prevent the Appian default behavior of opening a new tab
         event.preventDefault();
-        console.log('An Appian record link was clicked: ' + event);
+        console.log('An Appian record link was clicked: ' + stringifyEvent(event));
 
         // Pull off record Id attribute from the event
         var {recordId} = event.detail;
@@ -59,6 +59,21 @@
         // Add the tag to the dom for display
         container.appendChild(mainViewReportTag);
       }
+      
+      
+  function stringifyEvent(e) {
+  const obj = {};
+  for (let k in e) {
+    obj[k] = e[k];
+  }
+  return JSON.stringify(obj, (k, v) => {
+    if (v instanceof Node) return 'Node';
+    if (v instanceof Window) return 'Window';
+    return v;
+  }, ' ');
+}
+      
+      
     
       if (recordId == null || recordId === null)
       {
