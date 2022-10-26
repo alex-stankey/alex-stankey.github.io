@@ -10,14 +10,64 @@
       const recordId = urlParams.get("recordId");
   </script>  
   </head>
+  
+  
   <body>
     <!-- This custom HTML element specifies an Appian report to embed on the HTML page -->
+    <div id="embeddedDiv"></div>
     <script>
-    if (recordId == null || recordId === null)
-    {
-        document.write("<appian-report reportUrlStub=\"sdJaow\"></appian-report>");
-     }
+    
+      var embeddedRecordTag= 'embeddedRecord';
+      var embeddedMainViewTag= 'embeddedMainView';
+      var container = document.getElementById('embeddedDiv');
+    
+    function recordLinkOpened(event) {
+        // Prevent the Appian default behavior of opening a new tab
+        event.preventDefault();
+
+        // Pull off record Id attribute from the event
+        var {recordId} = event.detail;
+        console.log('An Appian task link was clicked [recordId= ' + recordId + '].');
+
+        // Create the appian-task embedded tag
+        var recordTag = document.createElement('appian-record');
+        recordTag.setAttribute('id', embeddedRecordTag);
+        recordTag.setAttribute('recordTypeUrlStub', 'ay11Ww');
+        recordTag.setAttribute('recordViewUrlStub', 'summary');
+        recordTag.setAttribute('recordIdentifier', '');
+
+        // Remove the appian-report tag and add the task tag in its place
+        var reportTag = document.getElementById(embeddedMainViewTag);
+        if (reportTag) {
+          reportTag.destroy();
+          container.removeChild(reportTag);
+        }
+        container.appendChild(recordTag);
+      }
+    
+     function addMainViewReport() {
+        // Build the appian-report tag for the task report
+        var mainViewReportTag = document.createElement('appian-report');
+        mainViewReportTag.setAttribute('id', embeddedMainViewTag);
+
+        // Replace this URL stub with your report's URL Stub
+        mainViewReportTag.setAttribute('reportUrlStub', 'sdJaow');
+
+        // Listen for clicks on task links
+        mainViewReportTag.addEventListener("open-task-link", recordLinkOpened, false);
+
+        // Add the tag to the dom for display
+        container.appendChild(mainViewReportTag);
+      }
+    
+      if (recordId == null || recordId === null)
+      {
+          addMainViewReport();
+       }
      </script>
+
+
+<!--
      <script>
       //document.write("<H2>---" + recordId + "----</H2>");
       if ( !(recordId == null || recordId ===  null))
@@ -25,6 +75,9 @@
         document.write("<H1>Record ID: " + recordId + "</H1>");
         document.write("<appian-record-view recordTypeUrlStub=\"ay11Ww\" recordIdentifier=\"" + recordId + "\" recordViewUrlStub=\"summary\"></appian-record-view>");
       }
+-->     
+      
+      
     </script>
     
   </body>
