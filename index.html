@@ -24,15 +24,15 @@
     function recordLinkOpened(event) {
         // Prevent the Appian default behavior of opening a new tab
         event.preventDefault();
+        console.log('An Appian record link was clicked: ' + event);
 
         // Pull off record Id attribute from the event
         var {recordId} = event.detail;
-        console.log('An Appian task link was clicked [recordId= ' + recordId + '].');
 
         // Create the appian-task embedded tag
         var recordTag = document.createElement('appian-record');
         recordTag.setAttribute('id', embeddedRecordTag);
-        recordTag.setAttribute('recordTypeUrlStub', 'ay11Ww');
+        recordTag.setAttribute('recordTypeUrlStub', event);
         recordTag.setAttribute('recordViewUrlStub', 'summary');
         recordTag.setAttribute('recordIdentifier', '');
 
@@ -53,7 +53,7 @@
         // Replace this URL stub with your report's URL Stub
         mainViewReportTag.setAttribute('reportUrlStub', 'sdJaow');
 
-        // Listen for clicks on task links
+        // Listen for clicks on record links
         mainViewReportTag.addEventListener("open-record-link", recordLinkOpened, false);
 
         // Add the tag to the dom for display
