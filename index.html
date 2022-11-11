@@ -45,6 +45,15 @@
         container.appendChild(recordTag);
       }
     
+function startProcessLinkOpened(event) {
+        // Prevent the Appian default behavior of opening a new tab
+        event.preventDefault();
+        console.log('An Appian record link was clicked: ' + stringifyEvent(event));
+
+      }
+        
+    
+    
      function addMainViewReport() {
         // Build the appian-report tag for the task report
         var mainViewReportTag = document.createElement('appian-report');
@@ -55,6 +64,7 @@
 
         // Listen for clicks on record links
         mainViewReportTag.addEventListener("open-record-link", recordLinkOpened, false);
+        mainViewReportTag.addEventListener("open-startprocess-link", startProcessLinkOpened, false);
 
         // Add the tag to the dom for display
         container.appendChild(mainViewReportTag);
