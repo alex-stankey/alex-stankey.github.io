@@ -29,12 +29,13 @@
         console.log('An Appian record link was clicked: ' + stringifyEvent(event));
 
         //Create a debug tag
-        var debugTag = document.createTextNode("Debug");
+        var debugStartTag = document.createTextNode("Debug Start");
+        var debugEndTag = document.createTextNode("Debug End");
     
 
 
         // Create the appian-record embedded tag
-        var recordTag = document.createElement('appian-record');
+        var recordTag = document.createElement('appian-record-view');
         recordTag.setAttribute('id', embeddedRecordTag);
         recordTag.setAttribute('recordTypeUrlStub', event.detail.recordTypeUrlStub);
         recordTag.setAttribute('recordViewUrlStub', event.detail.recordViewUrlStub);
@@ -47,8 +48,9 @@
           container.removeChild(reportTag);
         }
         
-        container.appendChild(debugTag);
+        container.appendChild(debugStartTag);
         container.appendChild(recordTag);
+        container.appendChild(debugEndTag);
         console.log('Finished processing Record Link event');
 
       }
