@@ -26,10 +26,7 @@
         event.preventDefault();
         console.log('An Appian record link was clicked: ' + stringifyEvent(event));
 
-        // Pull off record Id attribute from the event
-        var {recordId} = event.detail;
-
-        // Create the appian-task embedded tag
+        // Create the appian-record embedded tag
         var recordTag = document.createElement('appian-record');
         recordTag.setAttribute('id', embeddedRecordTag);
         recordTag.setAttribute('recordTypeUrlStub', event.detail.recordTypeUrlStub);
@@ -43,12 +40,14 @@
           container.removeChild(reportTag);
         }
         container.appendChild(recordTag);
+        console.log('Finished processing Record Link event');
+
       }
     
 function startProcessLinkOpened(event) {
         // Prevent the Appian default behavior of opening a new tab
         event.preventDefault();
-        console.log('An Appian record link was clicked: ' + stringifyEvent(event));
+        console.log('An Appian Start Process link was clicked: ' + stringifyEvent(event));
 
       }
         
@@ -92,7 +91,7 @@ function startProcessLinkOpened(event) {
      </script>
 
 
-<!--
+
      <script>
       //document.write("<H2>---" + recordId + "----</H2>");
       if ( !(recordId == null || recordId ===  null))
@@ -100,7 +99,7 @@ function startProcessLinkOpened(event) {
         document.write("<H1>Record ID: " + recordId + "</H1>");
         document.write("<appian-record-view recordTypeUrlStub=\"ay11Ww\" recordIdentifier=\"" + recordId + "\" recordViewUrlStub=\"summary\"></appian-record-view>");
       }
--->     
+
       
       
     </script>
