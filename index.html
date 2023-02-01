@@ -24,7 +24,8 @@
     
     function recordLinkOpened(event) {
         // Prevent the Appian default behavior of opening a new tab
-        event.preventDefault();
+        //event.preventDefault();
+        
         console.log('An Appian record link was clicked: ' + stringifyEvent(event));
 
         // Create the appian-record embedded tag
